@@ -1,0 +1,11 @@
+.canvas {
+  background-color: #CACACA;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  border-color: #6E6F6F;
+}
+
+.canvas-position-container {
+  position: relative;
+  height: 100%;
+}

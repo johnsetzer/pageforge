@@ -1,0 +1,84 @@
+.header {
+  height: 100px;
+  background: rgb(99, 60, 252);
+}
+
+.header-flex-row {
+  display: flex;
+}
+
+.header-shift-left {
+  display: flex;
+  flex-grow: 1;
+}
+
+.header-shift-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.header-img {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+}
+
+.header-title {
+  height: 80px;
+  margin: 10px;
+  font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 60px;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+.header-slogan {
+  align-self: flex-end;
+  color: rgb(232, 232, 232);
+  font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-size: 28px;
+  letter-spacing: 0px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header-slogan-redact {
+  align-self: flex-end;
+  color: #ff6e00;
+  font-family: Papyrus, fantasy, Brush Script Std, Brush Script MT, cursive;
+  font-size: 28px;
+  letter-spacing: 0px;
+  font-weight: bolder;
+  font-style: oblique;
+}
+
+.header-strike-anchor {
+  position: relative;
+}
+
+.header-slogan-redact-strike {
+  display: inline-block;
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  top: 0px;
+  transform: translate(-82px, 15px) rotate(-7deg);
+  background-color: #ff6e00;
+}
+
+.header-help {
+  padding: 10px;
+  color: rgb(232, 232, 232);
+  font-size: 20px;
+  letter-spacing: 0px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+

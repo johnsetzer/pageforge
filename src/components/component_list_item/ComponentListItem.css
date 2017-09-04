@@ -1,0 +1,8 @@
+.component-list-item {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.component-list-item--selected {
+  background-color: #CAEAFE;
+}

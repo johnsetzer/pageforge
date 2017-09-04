@@ -1,0 +1,18 @@
+.canvas-component {
+  position: absolute;
+  background-color: #FFFFFF;
+  border-color: #CAEAFE;
+}
+
+.canvas-component--selected {
+  border-color: red;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.canvas-component-title {
+  position: relative;
+  top: -15px;
+  font-size: 0.6em;
+  white-space: nowrap;
+}

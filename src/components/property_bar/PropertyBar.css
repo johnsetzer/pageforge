@@ -1,0 +1,26 @@
+.property-bar {
+  padding: 8px;
+  overflow-y: scroll;
+}
+
+.property-bar-h2{
+  margin: 0px;
+}
+
+.property-bar-list {
+  margin: 0px;
+  padding: 4px;
+  list-style: none;
+  font-family: "Courier New";
+}
+
+.property-bar-item {
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.property-bar-prop {
+  color: red;
+  font-size: 1em;
+}
+
