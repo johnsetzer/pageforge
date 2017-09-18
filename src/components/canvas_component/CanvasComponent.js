@@ -1,42 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './CanvasComponent.css'
 
-class CanvasComponent extends Component {
-
-  constructor(props) {
-    super(props)
-    this.handleMouseDown = this.handleMouseDown.bind(this)
+const CanvasComponent = ({component: comp, dragging, selectComponent}) => {
+  
+  const style = {
+    top: comp.top + 'px',
+    left: comp.left + 'px',
+    width: comp.width + 'px',
+    height: comp.height + 'px',
+    opacity: dragging ? 0.1 : '',
+    "backgroundColor": comp.styles.color
   }
 
-  handleMouseDown (event) {
-    this.props.selectComponent(this.props.component.id)
-  }
+  const selected = comp.selected ? ' canvas-component--selected' : ''
 
-  render() {
-    const comp = this.props.component
-
-    const style = {
-      top: comp.top + 'px',
-      left: comp.left + 'px',
-      width: comp.width + 'px',
-      height: comp.height + 'px',
-      opacity: this.props.dragging ? 0.5 : '',
-      "backgroundColor": comp.styles.color
-    }
-
-    const selected = comp.selected ? ' canvas-component--selected' : ''
-
-    return (
-      <div className={`canvas-component${selected}`}  
-        style={style}
-        draggable="true"
-        onMouseDown={this.handleMouseDown}>
-        <div className="canvas-component-title">
-          {comp.name}
-        </div>
+  return (
+    <div className={`canvas-component${selected}`}  
+      style={style}
+      draggable="true"
+      onMouseDown={() => selectComponent(comp.id)}>
+      <div className="canvas-component-title">
+        {comp.name}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default CanvasComponent;

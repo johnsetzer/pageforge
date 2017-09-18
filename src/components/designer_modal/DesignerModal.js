@@ -3,32 +3,27 @@ import Modal from '../modal/Modal.js'
 import ColorPickerButton from '../color_picker_button/ColorPickerButton.js'
 import './DesignerModal.css'
 
-class DesignerModal extends Modal {
+const DesignerModal = ({left, top, closeModal, selectedComponent, onColorChange}) => {
 
-  render() {
-    const {left, top, closeModal} = this.props
-    const {id, name, styles} = this.props.selectedComponent
+  const {id, name, styles} = selectedComponent
 
-    return (
-      <Modal title={name} left={left} top={top} overlay={false} closeModal={closeModal}>
-        <div>
-          <div className="desginer-modal-half">
-            <ColorPickerButton
-              color={styles.color}
-              onColorChange={(color) =>
-                this.props.onColorChange(id, color)
-              }/>
-          </div>  
-          <div className="desginer-modal-half desginer-modal-center-picker">
-            <div className="center-picker-under-contruction">
-              Under Construction
-            </div>
-            <img className="center-picker" src='/centering_widget.png' alt="centering widget"/>
+  return (
+    <Modal title={name} left={left} top={top} overlay={false} closeModal={closeModal}>
+      <div>
+        <div className="desginer-modal-half">
+          <ColorPickerButton
+            color={styles.color}
+            onColorChange={(color) => onColorChange(id, color)}/>
+        </div>  
+        <div className="desginer-modal-half desginer-modal-center-picker">
+          <div className="center-picker-under-contruction">
+            Under Construction
           </div>
+          <img className="center-picker" src='/centering_widget.png' alt="centering widget"/>
         </div>
-      </Modal>
-    );
-  }
+      </div>
+    </Modal>
+  )
 }
 
 export default DesignerModal
