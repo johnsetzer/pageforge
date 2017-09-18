@@ -5,6 +5,8 @@ const idMapAssign = (components, id, idMatchProps = {}, idMissProps = {}) =>
     comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps })
   )
 
+const findSelectedComponent = (components, id) => _.find(components, c => c.id === id);
+
 const initialState = {
   selectedComponent: null,
   components: []
@@ -26,31 +28,36 @@ const componentReducer = (state = initialState, action) => {
     }
 
     case 'SELECT_COMPONENT':
-      return { components: state.components, selectedComponent: _.find(state.components, c => c.id === action.id) }
+      return { components: state.components, selectedComponent: findSelectedComponent(state.components, action.id) }
 
-    case 'MOVE_COMPONENT':
+    case 'MOVE_COMPONENT': {
+      const newComps = idMapAssign(state.components, action.id, {
+        left: action.left,
+        top: action.top
+      })
       return {
-        components: idMapAssign(state.components, action.id, {
-          left: action.left,
-          top: action.top
-        }),
-        selectedComponent: state.selectedComponent
+        components: newComps,
+        selectedComponent: findSelectedComponent(newComps, action.id)
       }
+    }
 
-    case 'RENAME_COMPONENT':
+    case 'RENAME_COMPONENT': {
+      const newComps = idMapAssign(state.components, action.id, { name: action.name })
       return {
-        components: idMapAssign(state.components, action.id, { name: action.name }),
-        selectedComponent: state.selectedComponent
+        components: newComps,
+        selectedComponent: findSelectedComponent(newComps, action.id)
       }
+    }
 
-    case 'SET_COMPONENT_STYLES':
+    case 'SET_COMPONENT_STYLES': {
+      const newComps = state.components.map(comp =>
+        comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
+      )
       return {
-        components: state.components.map(
-          comp =>
-            comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
-        ),
-        selectedComponent: state.selectedComponent
+        components: newComps,
+        selectedComponent: findSelectedComponent(newComps, action.id)
       }
+    }
 
     default:
       return state

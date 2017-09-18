@@ -8,7 +8,7 @@ const CanvasComponent = ({ component: comp, dragging, selectedComponent, selectC
     width: comp.width + 'px',
     height: comp.height + 'px',
     opacity: dragging ? 0.1 : '',
-    backgroundColor: comp.styles.color
+    backgroundColor: comp.styles.backgroundColor
   }
 
   const selected = comp === selectedComponent ? ' canvas-component--selected' : ''

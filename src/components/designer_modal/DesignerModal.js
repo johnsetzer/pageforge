@@ -11,7 +11,7 @@ const DesignerModal = ({ left, top, closeModal, selectedComponent, onColorChange
       <div>
         <div className="desginer-modal-half">
           <ColorPickerButton
-            color={styles.color}
+            color={styles.backgroundColor}
             onColorChange={color => onColorChange(id, color)}
           />
         </div>

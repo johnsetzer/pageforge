@@ -109,7 +109,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(Actions.moveComponent(id, left, top))
     },
     changeComponentColor: (id, color) => {
-      dispatch(Actions.setComponentStyles(id, { color }))
+      dispatch(Actions.setComponentStyles(id, { backgroundColor: color }))
     },
     setMode: mode => {
       dispatch(Actions.setMode(mode))
