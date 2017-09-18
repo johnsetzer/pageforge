@@ -1,10 +1,5 @@
 const idMapAssign = (state, id, idMatchProps = {}, idMissProps = {}) =>
-  state.map(
-    comp =>
-      comp.id === id
-        ? { ...comp, ...idMatchProps }
-        : { ...comp, ...idMissProps }
-  )
+  state.map(comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps }))
 
 const selectComponent = (state, id) => {
   return idMapAssign(state, id, { selected: true }, { selected: false })
@@ -41,9 +36,7 @@ const componentReducer = (state = [], action) => {
     case 'SET_COMPONENT_STYLES':
       return state.map(
         comp =>
-          comp.id === action.id
-            ? { ...comp, styles: { ...comp.styles, ...action.styles } }
-            : comp
+          comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
       )
 
     default:
