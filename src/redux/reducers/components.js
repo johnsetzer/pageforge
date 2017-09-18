@@ -1,5 +1,3 @@
-let nextId = 1
-
 const idMapAssign = (state, id, idMatchProps = {}, idMissProps = {}) =>
   state.map(
     comp =>
@@ -15,10 +13,9 @@ const selectComponent = (state, id) => {
 const componentReducer = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_COMPONENT': {
-      const id = nextId++
       const newComp = {
-        id,
-        name: `Component ${id}`,
+        id: action.id,
+        name: `Component ${action.id}`,
         left: action.left,
         top: action.top,
         width: action.width,
@@ -26,7 +23,7 @@ const componentReducer = (state = [], action) => {
         selected: false,
         styles: {}
       }
-      return selectComponent([...state, newComp], id)
+      return selectComponent([...state, newComp], action.id)
     }
 
     case 'SELECT_COMPONENT':

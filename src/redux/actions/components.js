@@ -1,6 +1,9 @@
+let nextId = 1
+
 const createComponent = (left, top, width, height) => {
   return {
     type: 'CREATE_COMPONENT',
+    id: nextId++,
     left,
     top,
     width,
