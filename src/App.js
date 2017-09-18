@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import Header from './components/header/Header'
 import ComponentList from './components/component_list/ComponentList'
@@ -65,7 +64,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="columns">
-          <ComponentList components={components} selectComponent={selectComponent} />
+          <ComponentList components={components} selectedComponent={selectedComponent} selectComponent={selectComponent} />
           <Canvas
             components={components}
             selectedComponent={selectedComponent}
@@ -93,8 +92,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  ...state,
-  selectedComponent: _.find(state.components, c => c.selected)
+  components: state.components.components,
+  selectedComponent: state.components.selectedComponent,
+  ui: state.ui
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

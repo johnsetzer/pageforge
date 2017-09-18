@@ -1,11 +1,16 @@
-const idMapAssign = (state, id, idMatchProps = {}, idMissProps = {}) =>
-  state.map(comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps }))
+import _ from 'lodash'
 
-const selectComponent = (state, id) => {
-  return idMapAssign(state, id, { selected: true }, { selected: false })
+const idMapAssign = (components, id, idMatchProps = {}, idMissProps = {}) =>
+  components.map(
+    comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps })
+  )
+
+const initialState = {
+  selectedComponent: null,
+  components: []
 }
 
-const componentReducer = (state = [], action) => {
+const componentReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_COMPONENT': {
       const newComp = {
@@ -15,29 +20,37 @@ const componentReducer = (state = [], action) => {
         top: action.top,
         width: action.width,
         height: action.height,
-        selected: false,
         styles: {}
       }
-      return selectComponent([...state, newComp], action.id)
+      return { components: [...state.components, newComp], selectedComponent: newComp }
     }
 
     case 'SELECT_COMPONENT':
-      return selectComponent(state, action.id)
+      return { components: state.components, selectedComponent: _.find(state.components, c => c.id === action.id) }
 
     case 'MOVE_COMPONENT':
-      return idMapAssign(state, action.id, {
-        left: action.left,
-        top: action.top
-      })
+      return {
+        components: idMapAssign(state.components, action.id, {
+          left: action.left,
+          top: action.top
+        }),
+        selectedComponent: state.selectedComponent
+      }
 
     case 'RENAME_COMPONENT':
-      return idMapAssign(state, action.id, { name: action.name })
+      return {
+        components: idMapAssign(state.components, action.id, { name: action.name }),
+        selectedComponent: state.selectedComponent
+      }
 
     case 'SET_COMPONENT_STYLES':
-      return state.map(
-        comp =>
-          comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
-      )
+      return {
+        components: state.components.map(
+          comp =>
+            comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
+        ),
+        selectedComponent: state.selectedComponent
+      }
 
     default:
       return state

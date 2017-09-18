@@ -122,6 +122,7 @@ class Canvas extends Component {
             <CanvasComponent
               component={c}
               key={c.id}
+              selectedComponent={selectedComponent}
               selectComponent={selectComponent}
               moveComponent={moveComponent}
             />

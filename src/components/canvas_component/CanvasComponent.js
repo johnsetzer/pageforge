@@ -1,7 +1,7 @@
 import React from 'react'
 import './CanvasComponent.css'
 
-const CanvasComponent = ({ component: comp, dragging, selectComponent }) => {
+const CanvasComponent = ({ component: comp, dragging, selectedComponent, selectComponent }) => {
   const style = {
     top: comp.top + 'px',
     left: comp.left + 'px',
@@ -11,7 +11,7 @@ const CanvasComponent = ({ component: comp, dragging, selectComponent }) => {
     backgroundColor: comp.styles.color
   }
 
-  const selected = comp.selected ? ' canvas-component--selected' : ''
+  const selected = comp === selectedComponent ? ' canvas-component--selected' : ''
 
   return (
     <div
