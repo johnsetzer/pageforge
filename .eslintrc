@@ -1,0 +1,13 @@
+{
+  "extends": ["eslint:recommended", "react-app", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "eqeqeq": "error"
+  }
+}

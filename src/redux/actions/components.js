@@ -8,7 +8,7 @@ const createComponent = (left, top, width, height) => {
   }
 }
 
-const selectComponent = (id) => {
+const selectComponent = id => {
   return {
     type: 'SELECT_COMPONENT',
     id
