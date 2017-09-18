@@ -22,7 +22,7 @@ class App extends Component {
     document.addEventListener('keypress', this.handleKeyPress);
   }
 
-  componentDidUnount() {
+  componentWillUnmount() {
     document.removeEventListener('keypress', this.handleKeyPress);
   }
 
