@@ -4,7 +4,7 @@ import './ColorPickerButton.css'
 
 class ColorPickerButton extends React.Component {
   state = {
-    displayColorPicker: false,
+    displayColorPicker: false
   }
 
   handleClick = () => {
@@ -15,7 +15,7 @@ class ColorPickerButton extends React.Component {
     this.setState({ displayColorPicker: false })
   }
 
-  handleChange = (color) => {
+  handleChange = color => {
     this.props.onColorChange(color.hex)
   }
 
@@ -23,16 +23,17 @@ class ColorPickerButton extends React.Component {
     return (
       <div className="color-picker-button">
         <div className="color-picker-button-swatch" onClick={this.handleClick}>
-          <div className="color-picker-button-color" style={{'backgroundColor': this.props.color}} />
+          <div
+            className="color-picker-button-color"
+            style={{ backgroundColor: this.props.color }}
+          />
         </div>
-        {this.state.displayColorPicker && 
-        <div className="color-picker-button-popover">
-          <div className="color-picker-button-cover" onClick={this.handleClose}/>
-          <SketchPicker
-            color={this.props.color}
-            onChangeComplete={this.handleChange}/>
-        </div>}
-
+        {this.state.displayColorPicker && (
+          <div className="color-picker-button-popover">
+            <div className="color-picker-button-cover" onClick={this.handleClose} />
+            <SketchPicker color={this.props.color} onChangeComplete={this.handleChange} />
+          </div>
+        )}
       </div>
     )
   }

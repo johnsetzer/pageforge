@@ -1,7 +1,7 @@
 .canvas-component {
   position: absolute;
-  background-color: #FFFFFF;
-  border-color: #CAEAFE;
+  background-color: #ffffff;
+  border-color: #caeafe;
 }
 
 .canvas-component--selected {

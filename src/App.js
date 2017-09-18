@@ -12,18 +12,17 @@ import Actions from './redux/actions'
 import './App.css'
 
 class App extends Component {
-
   constructor(props) {
     super(props)
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   componentDidMount() {
-    document.addEventListener('keypress', this.handleKeyPress);
+    document.addEventListener('keypress', this.handleKeyPress)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', this.handleKeyPress);
+    document.removeEventListener('keypress', this.handleKeyPress)
   }
 
   handleKeyPress(event) {
@@ -33,7 +32,7 @@ class App extends Component {
     let M_KEY = 109
     let T_KEY = 116
 
-    switch(event.which) {
+    switch (event.which) {
       case QUESTION_KEY:
         this.props.toggleModal('HELP')
         break
@@ -54,15 +53,19 @@ class App extends Component {
   }
 
   render() {
-    const {components, selectedComponent, selectComponent, createComponent, moveComponent, changeComponentColor} = this.props;
+    const {
+      components,
+      selectedComponent,
+      selectComponent,
+      createComponent,
+      moveComponent,
+      changeComponentColor
+    } = this.props
     return (
       <div className="app">
         <Header />
         <div className="columns">
-          <ComponentList
-            components={components}
-            selectComponent={selectComponent}
-          />
+          <ComponentList components={components} selectComponent={selectComponent} />
           <Canvas
             components={components}
             selectedComponent={selectedComponent}
@@ -71,15 +74,21 @@ class App extends Component {
             selectComponent={selectComponent}
             moveComponent={moveComponent}
             changeComponentColor={changeComponentColor}
-            closeDesignerModal={()=>{this.props.toggleModal('DESIGNER')}}
+            closeDesignerModal={() => {
+              this.props.toggleModal('DESIGNER')
+            }}
           />
           <PropertyBar />
-          {this.props.ui.helpModalOpen &&
-            <HelpModal closeModal={()=>{this.props.toggleModal('HELP')}}/>
-          }
+          {this.props.ui.helpModalOpen && (
+            <HelpModal
+              closeModal={() => {
+                this.props.toggleModal('HELP')
+              }}
+            />
+          )}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -93,21 +102,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createComponent: (left, top, width, height) => {
       dispatch(Actions.createComponent(left, top, width, height))
     },
-    selectComponent: (id) => { dispatch(Actions.selectComponent(id)) },
+    selectComponent: id => {
+      dispatch(Actions.selectComponent(id))
+    },
     moveComponent: (id, left, top) => {
       dispatch(Actions.moveComponent(id, left, top))
     },
     changeComponentColor: (id, color) => {
-      dispatch(Actions.setComponentStyles(id, {color}))
+      dispatch(Actions.setComponentStyles(id, { color }))
     },
-    setMode: (mode) => { dispatch(Actions.setMode(mode)) },
-    toggleModal: (modal) => { dispatch(Actions.toggleModal(modal)) }
+    setMode: mode => {
+      dispatch(Actions.setMode(mode))
+    },
+    toggleModal: modal => {
+      dispatch(Actions.toggleModal(modal))
+    }
   }
 }
 
-const ConnectedApp = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
 
 export default ConnectedApp

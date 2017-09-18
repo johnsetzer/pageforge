@@ -1,8 +1,8 @@
 import React from 'react'
 import cssProps from '../../util/SanitizedCSSProperties'
 import './PropertyBar.css'
-  
-const randomValue = (prop) => {
+
+const randomValue = prop => {
   const randomIndex = Math.floor(Math.random() * prop.values.length)
   return prop.values[randomIndex]
 }
@@ -13,12 +13,12 @@ class PropertyBar extends React.Component {
     this.state = {
       cssProps: cssProps.map(prop => ({
         name: prop.property,
-        value: randomValue(prop),
+        value: randomValue(prop)
       }))
     }
   }
 
-  render () {
+  render() {
     return (
       <div className="property-bar">
         <h2 className="property-bar-h2">Daunting Property List</h2>

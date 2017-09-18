@@ -5,7 +5,7 @@ import _ from 'lodash'
 let sanitizedProps = _.uniqBy(cssProps, p => p.property)
 
 // Make sure every property has at least one value
-_.each(sanitizedProps, (p) => {
+_.each(sanitizedProps, p => {
   if (!p.values) {
     p.values = ['inherit']
   }
