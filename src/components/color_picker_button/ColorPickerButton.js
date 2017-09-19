@@ -2,7 +2,7 @@ import React from 'react'
 import { SketchPicker } from 'react-color'
 import './ColorPickerButton.css'
 
-class ColorPickerButton extends React.Component {
+class ColorPickerButton extends React.PureComponent {
   state = {
     displayColorPicker: false
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Modal.css'
 
-class Modal extends React.Component {
+class Modal extends React.PureComponent {
   render() {
     const { left, top, title, children, overlay = true, closeModal } = this.props
 
