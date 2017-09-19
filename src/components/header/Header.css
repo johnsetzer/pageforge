@@ -5,28 +5,33 @@
 
 .header-flex-row {
   display: flex;
+  justify-content: space-between;
 }
 
 .header-shift-left {
-  display: flex;
-  flex-grow: 1;
+  display: inline-block;
+  width: 80%;
+  overflow: hidden;
 }
 
 .header-shift-right {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  width: 20%;
 }
 
 .header-img {
+  display: inline-block;
   width: 80px;
   height: 80px;
   margin: 10px;
 }
 
 .header-title {
-  height: 80px;
-  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
   font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   color: rgb(255, 255, 255);
   font-size: 60px;
@@ -37,7 +42,9 @@
 }
 
 .header-slogan {
-  align-self: flex-end;
+  display: inline-block;
+  vertical-align: top;
+  padding: 66px 0px 0px 0px;
   color: rgb(232, 232, 232);
   font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
   font-size: 28px;
@@ -47,7 +54,9 @@
 }
 
 .header-slogan-redact {
-  align-self: flex-end;
+  display: inline-block;
+  vertical-align: top;
+  padding: 57px 0px 0px 3px;
   color: #ff6e00;
   font-family: Papyrus, fantasy, Brush Script Std, Brush Script MT, cursive;
   font-size: 28px;
@@ -57,6 +66,7 @@
 }
 
 .header-strike-anchor {
+  display: inline-block;
   position: relative;
 }
 
@@ -77,4 +87,59 @@
   letter-spacing: 0px;
   font-weight: normal;
   font-style: normal;
+}
+
+@media screen and (max-width: 1150px) {
+  .header {
+    height: 70px;
+  }
+
+  .header-shift-left {
+    width: 620px;
+  }
+
+  .header-img {
+    width: 62px;
+    height: 62px;
+    margin: 4px;
+  }
+
+  .header-title {
+    padding: 13px 4px 4px 4px;
+    font-size: 40px;
+  }
+
+  .header-slogan {
+    padding: 48px 0px 0px 0px;
+    font-size: 18px;
+  }
+
+  .header-slogan-redact {
+    padding: 41px 0px 0px 2px;
+    font-size: 19px;
+  }
+
+  .header-slogan-redact-strike {
+    width: 53px;
+    transform: translate(-54px, 10px) rotate(-7deg);
+    height: 2px;
+  }
+
+  .header-help {
+    padding: 6px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header-strike-anchor {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .header-slogan,
+  .header-slogan-redact {
+    display: none;
+  }
 }
