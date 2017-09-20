@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 import ui from '../reducers/ui'
-import Actions from '../actions'
+import Actions from '../action_creators'
 import deepFreeze from 'deep-freeze'
 
 it('has initial state', () => {

@@ -6,7 +6,7 @@ import ComponentList from './components/component_list/ComponentList'
 import Canvas from './components/canvas/Canvas'
 import PropertyBar from './components/property_bar/PropertyBar'
 import HelpModal from './components/help_modal/HelpModal'
-import Actions from './redux/actions'
+import Actions from './redux/action_creators'
 import keyPress from './keyPress'
 
 import './App.css'

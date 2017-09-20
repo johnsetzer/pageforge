@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from '../generic/modal/Modal.js'
-import Actions from '../../redux/actions'
+import Actions from '../../redux/action_creators'
 import './HelpModal.css'
 
 const HelpModal = props => {

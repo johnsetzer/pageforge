@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Actions from '../../redux/actions'
+import Actions from '../../redux/action_creators'
 import ComponentListItem from './component_list_item/ComponentListItem'
 import './ComponentList.css'
 
