@@ -42,7 +42,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="columns">
-          <ComponentList components={components} selectedComponent={selectedComponent} selectComponent={selectComponent} />
+          <ComponentList />
           <Canvas
             components={components}
             selectedComponent={selectedComponent}

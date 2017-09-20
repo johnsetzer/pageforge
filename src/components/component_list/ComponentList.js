@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import Actions from '../../redux/actions'
 import ComponentListItem from '../component_list_item/ComponentListItem'
 import './ComponentList.css'
 
@@ -12,4 +14,15 @@ const ComponentList = ({ components, selectedComponent, selectComponent }) => {
   )
 }
 
-export default ComponentList
+const mapStateToProps = (state) => ({
+  components: state.components.components,
+  selectedComponent: state.components.selectedComponent
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  selectComponent: id => {
+    dispatch(Actions.selectComponent(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentList)
