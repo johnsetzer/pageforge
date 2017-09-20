@@ -1,17 +1,21 @@
 import React from 'react'
 import './Modal.css'
 
+/**
+ * left and top => Where to render the modal, if ommited modal is centered on screen
+ * overlay => Should there be a grayed out background behind modal
+ */
 class Modal extends React.PureComponent {
   render() {
     const { left, top, title, children, overlay = true, closeModal } = this.props
 
-    let modalProps = {}
-    let boxProps = {}
+    let backgroundStyles = {}
+    let boxStyles = {}
     if (Number.isInteger(left) && Number.isInteger(top)) {
-      modalProps = {
+      backgroundStyles = {
         position: 'absolute'
       }
-      boxProps = {
+      boxStyles = {
         position: 'absolute',
         left: `${left}px`,
         top: `${top}px`
@@ -19,14 +23,14 @@ class Modal extends React.PureComponent {
     }
 
     if (!overlay) {
-      modalProps.backgroundColor = 'transparent'
+      backgroundStyles.backgroundColor = 'transparent'
     }
 
     return (
-      <div className="modal" style={modalProps} onClick={closeModal}>
+      <div className="modal-background" style={backgroundStyles} onClick={closeModal}>
         <div
           className="modal-box"
-          style={boxProps}
+          style={boxStyles}
           onClick={e => {
             e.stopPropagation()
           }}
