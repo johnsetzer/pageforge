@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Actions from '../../redux/actions'
-import ComponentListItem from '../component_list_item/ComponentListItem'
+import ComponentListItem from './component_list_item/ComponentListItem'
 import './ComponentList.css'
 
 const ComponentList = ({ components, selectedComponent, selectComponent }) => {

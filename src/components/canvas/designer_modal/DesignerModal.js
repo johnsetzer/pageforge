@@ -1,6 +1,6 @@
 import React from 'react'
-import Modal from '../modal/Modal.js'
-import ColorPickerButton from '../color_picker_button/ColorPickerButton.js'
+import Modal from '../../generic/modal/Modal.js'
+import ColorPickerButton from '../../generic/color_picker_button/ColorPickerButton.js'
 import './DesignerModal.css'
 
 const DesignerModal = ({ left, top, closeModal, selectedComponent, onColorChange }) => {

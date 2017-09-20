@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Actions from '../../redux/actions'
-import CanvasComponent from '../canvas_component/CanvasComponent'
-import DesignerModal from '../designer_modal/DesignerModal.js'
+import CanvasComponent from './canvas_component/CanvasComponent'
+import DesignerModal from './designer_modal/DesignerModal.js'
 import './Canvas.css'
 
 const MIN_COMPONENT_LENGTH = 10

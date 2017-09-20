@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Modal from '../modal/Modal.js'
+import Modal from '../generic/modal/Modal.js'
 import Actions from '../../redux/actions'
 import './HelpModal.css'
 
