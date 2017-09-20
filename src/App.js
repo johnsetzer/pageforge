@@ -56,18 +56,14 @@ class App extends Component {
             }}
           />
           <PropertyBar />
-          {this.props.ui.helpModalOpen && (
-            <HelpModal
-              closeModal={() => {
-                this.props.toggleModal('HELP')
-              }}
-            />
-          )}
+          <HelpModal />
         </div>
       </div>
     )
   }
 }
+
+// TODO ComponentList and Canvas can connect themselves to the store.
 
 const mapStateToProps = (state, ownProps) => ({
   components: state.components.components,
@@ -75,28 +71,26 @@ const mapStateToProps = (state, ownProps) => ({
   ui: state.ui
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    createComponent: (left, top, width, height) => {
-      dispatch(Actions.createComponent(left, top, width, height))
-    },
-    selectComponent: id => {
-      dispatch(Actions.selectComponent(id))
-    },
-    moveComponent: (id, left, top) => {
-      dispatch(Actions.moveComponent(id, left, top))
-    },
-    changeComponentColor: (id, color) => {
-      dispatch(Actions.setComponentStyles(id, { backgroundColor: color }))
-    },
-    setMode: mode => {
-      dispatch(Actions.setMode(mode))
-    },
-    toggleModal: modal => {
-      dispatch(Actions.toggleModal(modal))
-    }
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createComponent: (left, top, width, height) => {
+    dispatch(Actions.createComponent(left, top, width, height))
+  },
+  selectComponent: id => {
+    dispatch(Actions.selectComponent(id))
+  },
+  moveComponent: (id, left, top) => {
+    dispatch(Actions.moveComponent(id, left, top))
+  },
+  changeComponentColor: (id, color) => {
+    dispatch(Actions.setComponentStyles(id, { backgroundColor: color }))
+  },
+  setMode: mode => {
+    dispatch(Actions.setMode(mode))
+  },
+  toggleModal: modal => {
+    dispatch(Actions.toggleModal(modal))
   }
-}
+})
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
 
