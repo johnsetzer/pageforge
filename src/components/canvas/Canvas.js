@@ -126,7 +126,6 @@ class Canvas extends Component {
               key={c.id}
               selectedComponent={selectedComponent}
               selectComponent={selectComponent}
-              moveComponent={moveComponent}
             />
           ))}
           {designerModalOpen &&
