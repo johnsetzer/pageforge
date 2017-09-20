@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Actions from '../../redux/actions'
 import CanvasComponent from '../canvas_component/CanvasComponent'
 import DesignerModal from '../designer_modal/DesignerModal.js'
 import './Canvas.css'
@@ -143,4 +145,28 @@ class Canvas extends Component {
   }
 }
 
-export default Canvas
+const mapStateToProps = (state) => ({
+  components: state.components.components,
+  selectedComponent: state.components.selectedComponent,
+  ui: state.ui
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  createComponent: (left, top, width, height) => {
+    dispatch(Actions.createComponent(left, top, width, height))
+  },
+  selectComponent: id => {
+    dispatch(Actions.selectComponent(id))
+  },
+  moveComponent: (id, left, top) => {
+    dispatch(Actions.moveComponent(id, left, top))
+  },
+  changeComponentColor: (id, color) => {
+    dispatch(Actions.setComponentStyles(id, { backgroundColor: color }))
+  },
+  closeDesignerModal: () => {
+    dispatch(Actions.toggleModal('DESIGNER'))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas)
