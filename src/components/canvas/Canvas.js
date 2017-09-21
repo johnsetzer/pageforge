@@ -73,6 +73,7 @@ class Canvas extends Component {
 
       this.props.moveComponent(comp.id, newX, newY)
     }
+    event.preventDefault()
   }
 
   cursorStyle(mode) {
@@ -93,7 +94,6 @@ class Canvas extends Component {
       components,
       selectedComponent,
       selectComponent,
-      moveComponent,
       changeComponentColor,
       closeDesignerModal
     } = this.props
@@ -122,8 +122,9 @@ class Canvas extends Component {
         <div className="canvas-position-container">
           {components.map(c => (
             <CanvasComponent
-              component={c}
               key={c.id}
+              component={c}
+              draggable={mode === 'MOVE_COMPONENT'}
               selectedComponent={selectedComponent}
               selectComponent={selectComponent}
             />

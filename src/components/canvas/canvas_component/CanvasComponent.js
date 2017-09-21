@@ -11,7 +11,7 @@ class CanvasComponent extends React.PureComponent {
   }
 
   render () {
-    const { component: comp, dragging, selectedComponent, selectComponent } = this.props;
+    const { component: comp, draggable, selectedComponent, selectComponent} = this.props;
     
     const style = {
       top: comp.top + 'px',
@@ -28,10 +28,15 @@ class CanvasComponent extends React.PureComponent {
       <div
         className={`canvas-component${selected}`}
         style={style}
-        draggable="true"
+        draggable={draggable}
         onMouseDown={() => selectComponent(comp.id)}
-        onDragStart={() => {this.setState({ dragging: true })}}
-        onDragEnd={() => {this.setState({ dragging: false })}}
+        onDragStart={(e) => {
+          e.dataTransfer.setData('firefox/fact', 'Firefox won\'t drag unless we setData().')
+          this.setState({ dragging: true })
+        }}
+        onDragEnd={() => {
+          this.setState({ dragging: false })
+        }}
       >
         <div className="canvas-component-title">{comp.name}</div>
       </div>
