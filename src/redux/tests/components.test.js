@@ -11,6 +11,15 @@ beforeEach(() => {
   deepFreeze(store.getState())
 })
 
+it('has initial state of', () => {
+  const initialState = {
+    selectedComponent: null,
+    components: []
+  }
+
+  expect(store.getState()).toEqual(initialState)
+})
+
 it('creates components', () => {
   store.dispatch(Actions.createComponent(1, 2, 3, 4))
 
@@ -34,10 +43,9 @@ it('creates components', () => {
 
 it('creating a component selects the most recently created component', () => {
   store.dispatch(Actions.createComponent(1, 2, 3, 4))
-  const secondAction = Actions.createComponent(11, 12, 13, 14)
-  store.dispatch(secondAction)
+  store.dispatch(Actions.createComponent(11, 12, 13, 14))
 
-  expect(store.getState().selectedComponent.id).toBe(secondAction.id)
+  expect(store.getState().selectedComponent.id).toBe(2)
 })
 
 it('selects the a component', () => {
@@ -56,11 +64,27 @@ it('moves a component', () => {
   expect(store.getState().components[0].top).toBe(200)
 })
 
+it('selects the a component when it is moved', () => {
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.createComponent(11, 12, 13, 14))
+  store.dispatch(Actions.moveComponent(1, 100, 200))
+
+  expect(store.getState().selectedComponent.id).toBe(1)
+})
+
 it('renames a component', () => {
   store.dispatch(Actions.createComponent(1, 2, 3, 4))
   store.dispatch(Actions.renameComponent(1, 'RENAMED'))
 
   expect(store.getState().components[0].name).toBe('RENAMED')
+})
+
+it('selects a component when it is renamed', () => {
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.createComponent(11, 12, 13, 14))
+  store.dispatch(Actions.renameComponent(1, 'RENAMED'))
+
+  expect(store.getState().selectedComponent.id).toBe(1)
 })
 
 it('sets componenet styels', () => {
@@ -69,4 +93,12 @@ it('sets componenet styels', () => {
   store.dispatch(Actions.setComponentStyles(1, { style2: 'CHANGED', style3: 3 }))
 
   expect(store.getState().components[0].styles).toEqual({ style1: 1, style2: 'CHANGED', style3: 3 })
+})
+
+it('selects a component when it is restyled', () => {
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.createComponent(11, 12, 13, 14))
+  store.dispatch(Actions.setComponentStyles(1, { style1: 1, style2: 2 }))
+
+  expect(store.getState().selectedComponent.id).toBe(1)
 })

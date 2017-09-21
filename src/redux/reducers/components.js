@@ -1,18 +1,12 @@
 import _ from 'lodash'
+import { combineReducers } from 'redux'
 
-const idMapAssign = (components, id, idMatchProps = {}, idMissProps = {}) =>
-  components.map(
-    comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps })
-  )
+const idMapAssign = (components, id, idMatchProps = {}) =>
+  components.map(comp => (comp.id === id ? { ...comp, ...idMatchProps } : comp))
 
 const findSelectedComponent = (components, id) => _.find(components, c => c.id === id)
 
-const initialState = {
-  selectedComponent: null,
-  components: []
-}
-
-const componentReducer = (state = initialState, action) => {
+const componentsReducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_COMPONENT': {
       const newComp = {
@@ -24,47 +18,45 @@ const componentReducer = (state = initialState, action) => {
         height: action.height,
         styles: {}
       }
-      return { components: [...state.components, newComp], selectedComponent: newComp }
+      return [...state, newComp]
     }
 
-    case 'SELECT_COMPONENT':
-      return {
-        components: state.components,
-        selectedComponent: findSelectedComponent(state.components, action.id)
-      }
-
     case 'MOVE_COMPONENT': {
-      const newComps = idMapAssign(state.components, action.id, {
+      return idMapAssign(state, action.id, {
         left: action.left,
         top: action.top
       })
-      return {
-        components: newComps,
-        selectedComponent: findSelectedComponent(newComps, action.id)
-      }
     }
 
     case 'RENAME_COMPONENT': {
-      const newComps = idMapAssign(state.components, action.id, { name: action.name })
-      return {
-        components: newComps,
-        selectedComponent: findSelectedComponent(newComps, action.id)
-      }
+      return idMapAssign(state, action.id, { name: action.name })
     }
 
     case 'SET_COMPONENT_STYLES': {
-      const newComps = state.components.map(
+      const newComps = state.map(
         comp =>
           comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
       )
-      return {
-        components: newComps,
-        selectedComponent: findSelectedComponent(newComps, action.id)
-      }
+      return newComps
     }
 
     default:
       return state
+  }
+}
+
+const initialState = {
+  selectedComponent: null,
+  components: []
+}
+
+const componentReducer = (state=initialState, action) => {
+  const components = componentsReducer(state.components, action)
+  const selectedComponent = findSelectedComponent(components, action.id) || null
+
+  return {
+    components,
+    selectedComponent
   }
 }
 
