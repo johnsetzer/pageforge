@@ -94,6 +94,7 @@ class Canvas extends Component {
       components,
       selectedComponent,
       selectComponent,
+      renameComponent,
       changeComponentColor,
       closeDesignerModal
     } = this.props
@@ -133,6 +134,7 @@ class Canvas extends Component {
             selectedComponent && (
               <DesignerModal
                 selectedComponent={selectedComponent}
+                renameComponent={renameComponent}
                 onColorChange={changeComponentColor}
                 left={left}
                 top={top}
@@ -160,6 +162,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   moveComponent: (id, left, top) => {
     dispatch(Actions.moveComponent(id, left, top))
+  },
+  renameComponent: (id, name) => {
+    dispatch(Actions.renameComponent(id, name))
   },
   changeComponentColor: (id, color) => {
     dispatch(Actions.setComponentStyles(id, { backgroundColor: color }))

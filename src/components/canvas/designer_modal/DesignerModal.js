@@ -1,13 +1,21 @@
 import React from 'react'
 import Modal from '../../generic/modal/Modal.js'
 import ColorPickerButton from '../../generic/color_picker_button/ColorPickerButton.js'
+import OneLineForm from '../../generic/one_line_form/OneLineForm'
 import './DesignerModal.css'
 
-const DesignerModal = ({ left, top, closeModal, selectedComponent, onColorChange }) => {
+const DesignerModal = ({ left, top, closeModal, selectedComponent, renameComponent, onColorChange }) => {
   const { id, name, styles } = selectedComponent
 
+  const title = (
+    <OneLineForm
+      value={name}
+      onSubmit={(name)=>{renameComponent(id, name)}}
+    />
+  )
+
   return (
-    <Modal title={name} left={left} top={top} overlay={false} closeModal={closeModal}>
+    <Modal title={title} left={left} top={top} overlay={false} closeModal={closeModal}>
       <div>
         <div className="desginer-modal-half">
           <ColorPickerButton
