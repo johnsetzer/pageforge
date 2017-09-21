@@ -3,10 +3,15 @@ import components from '../reducers/components'
 import Actions from '../action_creators'
 import deepFreeze from 'deep-freeze'
 
-it('creates components', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
+let store
 
+beforeEach(() => {
+  Actions.resetComponentCreator()
+  store = createStore(components)
+  deepFreeze(store.getState())
+})
+
+it('creates components', () => {
   store.dispatch(Actions.createComponent(1, 2, 3, 4))
 
   const newComp = {
@@ -19,18 +24,15 @@ it('creates components', () => {
     styles: {}
   }
 
-  const afterOneCreate = {
+  const afterCreate = {
     components: [newComp],
     selectedComponent: newComp
   }
 
-  expect(store.getState()).toEqual(afterOneCreate)
+  expect(store.getState()).toEqual(afterCreate)
 })
 
 it('creating a component selects the most recently created component', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
-
   store.dispatch(Actions.createComponent(1, 2, 3, 4))
   const secondAction = Actions.createComponent(11, 12, 13, 14)
   store.dispatch(secondAction)
@@ -39,48 +41,32 @@ it('creating a component selects the most recently created component', () => {
 })
 
 it('selects the a component', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
-
-  const firstAction = Actions.createComponent(1, 2, 3, 4)
-  store.dispatch(firstAction)
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
   store.dispatch(Actions.createComponent(11, 12, 13, 14))
-  store.dispatch(Actions.selectComponent(firstAction.id))
+  store.dispatch(Actions.selectComponent(1))
 
-  expect(store.getState().selectedComponent.id).toBe(firstAction.id)
+  expect(store.getState().selectedComponent.id).toBe(1)
 })
 
 it('moves a component', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
-
-  const firstAction = Actions.createComponent(1, 2, 3, 4)
-  store.dispatch(firstAction)
-  store.dispatch(Actions.moveComponent(firstAction.id, 100, 200))
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.moveComponent(1, 100, 200))
 
   expect(store.getState().components[0].left).toBe(100)
   expect(store.getState().components[0].top).toBe(200)
 })
 
 it('renames a component', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
-
-  const firstAction = Actions.createComponent(1, 2, 3, 4)
-  store.dispatch(firstAction)
-  store.dispatch(Actions.renameComponent(firstAction.id, 'RENAMED'))
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.renameComponent(1, 'RENAMED'))
 
   expect(store.getState().components[0].name).toBe('RENAMED')
 })
 
 it('sets componenet styels', () => {
-  let store = createStore(components)
-  deepFreeze(store.getState())
-
-  const firstAction = Actions.createComponent(1, 2, 3, 4)
-  store.dispatch(firstAction)
-  store.dispatch(Actions.setComponentStyles(firstAction.id, { style1: 1, style2: 2 }))
-  store.dispatch(Actions.setComponentStyles(firstAction.id, { style2: 'CHANGED', style3: 3 }))
+  store.dispatch(Actions.createComponent(1, 2, 3, 4))
+  store.dispatch(Actions.setComponentStyles(1, { style1: 1, style2: 2 }))
+  store.dispatch(Actions.setComponentStyles(1, { style2: 'CHANGED', style3: 3 }))
 
   expect(store.getState().components[0].styles).toEqual({ style1: 1, style2: 'CHANGED', style3: 3 })
 })

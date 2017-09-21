@@ -1,5 +1,10 @@
 let nextId = 1
 
+// Call this in tests to make sure each test starts with a consistent state
+const resetComponentCreator = () => {
+  nextId = 1
+}
+
 const createComponent = (left, top, width, height) => {
   return {
     type: 'CREATE_COMPONENT',
@@ -44,6 +49,7 @@ const setComponentStyles = (id, styles) => {
 }
 
 export default {
+  resetComponentCreator,
   createComponent,
   selectComponent,
   moveComponent,
