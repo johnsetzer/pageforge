@@ -4,11 +4,17 @@ import Actions from '../../redux/action_creators'
 import ComponentListItem from './component_list_item/ComponentListItem'
 import './ComponentList.css'
 
-const ComponentList = ({ components, selectedComponent, selectComponent }) => {
+const ComponentList = ({ components, selectedComponent, selectComponent, renameComponent }) => {
   return (
     <ul className="component-list">
       {components.map(c => (
-        <ComponentListItem key={c.id} component={c} selectedComponent={selectedComponent} selectComponent={selectComponent} />
+        <ComponentListItem
+          key={c.id}
+          component={c}
+          selectedComponent={selectedComponent}
+          selectComponent={selectComponent}
+          renameComponent={renameComponent}
+        />
       ))}
     </ul>
   )
@@ -22,6 +28,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   selectComponent: id => {
     dispatch(Actions.selectComponent(id))
+  },
+  renameComponent: (id, name) => {
+    dispatch(Actions.renameComponent(id, name))
   }
 })
 

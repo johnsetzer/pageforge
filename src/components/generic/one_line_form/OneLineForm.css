@@ -1,0 +1,21 @@
+.one-line-form-input {
+  width: 100%;
+  border: 0px;
+  outline: none;
+  outline-style: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  background-color: transparent;
+}
+
+.one-line-form-input:focus {
+  color: #6e6f6f;
+  background-color: white;
+  border-bottom: 1px solid #6e6f6f;
+}
+
+.one-line-form-input--can-focus:hover {
+  color: #6e6f6f;
+  border-bottom: 1px solid #6e6f6f;
+}

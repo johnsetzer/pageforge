@@ -17,21 +17,13 @@ class App extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
-  componentDidMount() {
-    document.addEventListener('keypress', this.handleKeyPress)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.handleKeyPress)
-  }
-
   handleKeyPress(event) {
     keyPress(event, this.props.toggleModal, this.props.setMode)
   }
 
   render() {
     return (
-      <div className="app">
+      <div className="app" onKeyPress={this.handleKeyPress} tabIndex="0">
         <Header />
         <div className="columns">
           <ComponentList />
