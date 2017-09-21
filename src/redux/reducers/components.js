@@ -45,6 +45,20 @@ const componentsReducer = (state, action) => {
   }
 }
 
+const selectedComponentReducer = (state, action, components) => {
+  switch (action.type) {
+    case 'CREATE_COMPONENT':
+    case 'SELECT_COMPONENT':
+    case 'MOVE_COMPONENT':
+    case 'RENAME_COMPONENT':
+    case 'SET_COMPONENT_STYLES':
+      return findSelectedComponent(components, action.id) || null
+
+    default:
+      return state
+  }
+}
+
 const initialState = {
   selectedComponent: null,
   components: []
@@ -52,7 +66,7 @@ const initialState = {
 
 const componentReducer = (state=initialState, action) => {
   const components = componentsReducer(state.components, action)
-  const selectedComponent = findSelectedComponent(components, action.id) || null
+  const selectedComponent = selectedComponentReducer(state.selectedComponent, action, components)
 
   return {
     components,
