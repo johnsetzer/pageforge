@@ -20,12 +20,12 @@ const ComponentList = ({ components, selectedComponent, selectComponent, renameC
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   components: state.components.components,
   selectedComponent: state.components.selectedComponent
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   selectComponent: id => {
     dispatch(Actions.selectComponent(id))
   },

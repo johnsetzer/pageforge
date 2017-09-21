@@ -1,5 +1,5 @@
-import React from 'react';
-import './OneLineForm.css';
+import React from 'react'
+import './OneLineForm.css'
 
 class OneLineForm extends React.PureComponent {
   constructor(props) {
@@ -23,11 +23,11 @@ class OneLineForm extends React.PureComponent {
   }
 
   onChange(event) {
-    this.setState({value: event.target.value})
+    this.setState({ value: event.target.value })
   }
 
   close() {
-    this.setState({canFocus: false})
+    this.setState({ canFocus: false })
     document.activeElement.blur()
   }
 
@@ -49,17 +49,20 @@ class OneLineForm extends React.PureComponent {
   }
 
   onMouseOut(event) {
-    this.setState({canFocus: true});
+    this.setState({ canFocus: true })
   }
 
-  render () {
+  render() {
     const focusClass = this.state.canFocus ? ' one-line-form-input--can-focus' : ''
     return (
       <form onSubmit={this.onSubmit}>
-        <input type="text"
+        <input
+          type="text"
           className={`one-line-form-input${focusClass}`}
           placeholder={this.props.placeHolder}
-          ref={(input) => { this.input = input }} 
+          ref={input => {
+            this.input = input
+          }}
           value={this.state.value}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}

@@ -2,7 +2,6 @@ import React from 'react'
 import './CanvasComponent.css'
 
 class CanvasComponent extends React.PureComponent {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -10,9 +9,9 @@ class CanvasComponent extends React.PureComponent {
     }
   }
 
-  render () {
-    const { component: comp, draggable, selectedComponent, selectComponent} = this.props;
-    
+  render() {
+    const { component: comp, draggable, selectedComponent, selectComponent } = this.props
+
     const style = {
       top: comp.top + 'px',
       left: comp.left + 'px',
@@ -23,15 +22,15 @@ class CanvasComponent extends React.PureComponent {
     }
 
     const selected = comp === selectedComponent ? ' canvas-component--selected' : ''
-    
+
     return (
       <div
         className={`canvas-component${selected}`}
         style={style}
         draggable={draggable}
         onMouseDown={() => selectComponent(comp.id)}
-        onDragStart={(e) => {
-          e.dataTransfer.setData('firefox/fact', 'Firefox won\'t drag unless we setData().')
+        onDragStart={e => {
+          e.dataTransfer.setData('firefox/fact', "Firefox won't drag unless we setData().")
           this.setState({ dragging: true })
         }}
         onDragEnd={() => {

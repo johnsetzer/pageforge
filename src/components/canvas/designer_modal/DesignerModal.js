@@ -4,13 +4,22 @@ import ColorPickerButton from '../../generic/color_picker_button/ColorPickerButt
 import OneLineForm from '../../generic/one_line_form/OneLineForm'
 import './DesignerModal.css'
 
-const DesignerModal = ({ left, top, closeModal, selectedComponent, renameComponent, onColorChange }) => {
+const DesignerModal = ({
+  left,
+  top,
+  closeModal,
+  selectedComponent,
+  renameComponent,
+  onColorChange
+}) => {
   const { id, name, styles } = selectedComponent
 
   const title = (
     <OneLineForm
       value={name}
-      onSubmit={(name)=>{renameComponent(id, name)}}
+      onSubmit={name => {
+        renameComponent(id, name)
+      }}
     />
   )
 

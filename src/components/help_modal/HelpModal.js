@@ -6,7 +6,7 @@ import './HelpModal.css'
 
 const HelpModal = props => {
   if (!props.open) {
-    return null;
+    return null
   }
 
   return (
@@ -26,11 +26,11 @@ const HelpModal = props => {
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   open: state.ui.helpModalOpen
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   closeModal: () => {
     dispatch(Actions.toggleModal('HELP'))
   }

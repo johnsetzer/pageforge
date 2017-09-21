@@ -147,13 +147,13 @@ class Canvas extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   components: state.components.components,
   selectedComponent: state.components.selectedComponent,
   ui: state.ui
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   createComponent: (left, top, width, height) => {
     dispatch(Actions.createComponent(left, top, width, height))
   },

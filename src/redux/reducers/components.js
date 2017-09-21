@@ -5,7 +5,7 @@ const idMapAssign = (components, id, idMatchProps = {}, idMissProps = {}) =>
     comp => (comp.id === id ? { ...comp, ...idMatchProps } : { ...comp, ...idMissProps })
   )
 
-const findSelectedComponent = (components, id) => _.find(components, c => c.id === id);
+const findSelectedComponent = (components, id) => _.find(components, c => c.id === id)
 
 const initialState = {
   selectedComponent: null,
@@ -28,7 +28,10 @@ const componentReducer = (state = initialState, action) => {
     }
 
     case 'SELECT_COMPONENT':
-      return { components: state.components, selectedComponent: findSelectedComponent(state.components, action.id) }
+      return {
+        components: state.components,
+        selectedComponent: findSelectedComponent(state.components, action.id)
+      }
 
     case 'MOVE_COMPONENT': {
       const newComps = idMapAssign(state.components, action.id, {
@@ -50,8 +53,9 @@ const componentReducer = (state = initialState, action) => {
     }
 
     case 'SET_COMPONENT_STYLES': {
-      const newComps = state.components.map(comp =>
-        comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
+      const newComps = state.components.map(
+        comp =>
+          comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
       )
       return {
         components: newComps,
