@@ -18,8 +18,7 @@ export const idMapFunc = (components, id, func = c => c) =>
     if (comp.id === id) {
       return func(comp)
     } else {
-      comp.children = idMapFunc(comp.children, id, func)
-      return comp
+      return { ...comp, children: idMapFunc(comp.children, id, func) }
     }
   })
 
@@ -27,6 +26,7 @@ export const idMapAssign = (components, id, idMatchProps = {}) =>
   idMapFunc(components, id, (comp) =>({ ...comp, ...idMatchProps }))
 
 export const isParent = (parent, child) =>
+  parent.id !== child.id &&
   parent.left <= child.left &&
   parent.top <= child.top &&
   parent.left + parent.width >= child.left + child.width &&
@@ -71,10 +71,32 @@ const componentsReducer = (state, action) => {
     }
 
     case 'MOVE_COMPONENT': {
-      return idMapAssign(state, action.id, {
-        left: action.left,
-        top: action.top
-      })
+      let movedState = state
+      let toMove = findSelectedComponent(state, action.id)
+      const currentParent = findParentComponent(state, toMove)
+      toMove = {...toMove, left: action.left, top: action.top }
+      const newParent = findParentComponent(state, toMove)
+      
+      if (currentParent !== newParent) {
+        if (currentParent === undefined) {
+          movedState = state.filter(c => c.id !== action.id)
+        } else {
+          currentParent.children = currentParent.children.filter(c => c.id !== action.id)
+        }
+        if (newParent === undefined) {
+          movedState = [...state, toMove]
+        } else {
+          newParent.children = [...newParent.children, toMove]
+        }
+      } else {
+        if (newParent === undefined) {
+          movedState = idMapFunc(state, action.id, () => toMove)
+        } else {
+          newParent.children = idMapFunc(newParent.children, action.id, () => toMove)
+        }
+      }
+
+      return movedState
     }
 
     case 'RENAME_COMPONENT': {
