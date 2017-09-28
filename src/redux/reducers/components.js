@@ -13,15 +13,18 @@ export const findSelectedComponent = (components, id) => {
   return undefined
 }
 
-export const idMapAssign = (components, id, idMatchProps = {}) =>
+export const idMapFunc = (components, id, func = c => c) =>
   components.map(comp => {
     if (comp.id === id) {
-      return { ...comp, ...idMatchProps }
+      return func(comp)
     } else {
-      comp.children = idMapAssign(comp.children, id, idMatchProps)
+      comp.children = idMapFunc(comp.children, id, func)
       return comp
     }
   })
+
+export const idMapAssign = (components, id, idMatchProps = {}) =>
+  idMapFunc(components, id, (comp) =>({ ...comp, ...idMatchProps }))
 
 export const isParent = (parent, child) =>
   parent.left <= child.left &&
@@ -79,11 +82,10 @@ const componentsReducer = (state, action) => {
     }
 
     case 'SET_COMPONENT_STYLES': {
-      const newComps = state.map(
-        comp =>
-          comp.id === action.id ? { ...comp, styles: { ...comp.styles, ...action.styles } } : comp
-      )
-      return newComps
+      return idMapFunc(state, action.id, (comp) => ({
+        ...comp,
+        styles: { ...comp.styles, ...action.styles}
+      }))
     }
 
     default:
